@@ -8,7 +8,12 @@ function App() {
       <div class="panel">
         <h1>To Go Menu</h1>
         <ul class="menu">
-          <MenuItem> </MenuItem>
+          <MenuItem price="$3.25" itemName = "French Fries with Ketchup"
+            imagePath="images/plate__chicken-salad.png"
+          />
+          <MenuItem price="$6.25" itemName = "French Fries with Toast" 
+            imagePath="images/plate__french-fries.png"
+          />
           <li>
             <div class="plate">
               <img src="images/plate__french-fries.png" alt="French Fries" class="plate" />
