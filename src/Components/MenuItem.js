@@ -7,7 +7,7 @@ const MenuItem = (props) => {
             </div>
             <div class="content">
                 <p class="menu-item">French Fries with Ketchup</p>
-                <p class="price">$2.23</p>
+                <p class="price">$2.24</p>
                 <button class="in-cart">
                     <img src="images/check.svg" alt="Check" />
                     In Cart
