@@ -1,82 +1,55 @@
+import React, { useState } from 'react';
+
 import logo from './logo.svg';
 import './App.css';
 import MenuItem from './Components/MenuItem';
+import CartItem from './Components/CartItem';
 
 function App() {
+  const [subtotal, setSubtotal] = useState(0);
+  const cartItems = [];
+  const [val,setVal]=useState("bla bla");
+
+   function toggle(){
+   setVal((val=="bla bla")?"OFF":"bla bla");
+  }
+
+  function handleSubtotalChange(newValue) {
+    setSubtotal(newValue);
+  }
+
+  function handleAddToCart(menuItem) {
+    cartItems.push(menuItem);
+  }
+  
   return (
     <><div class="wrapper menu">
+      <button hidden onClick={toggle}>{val}</button>
       <div class="panel">
         <h1>To Go Menu</h1>
         <ul class="menu">
-          <MenuItem price="$3.25" itemName = "French Fries with Ketchup"
-            imagePath="images/plate__chicken-salad.png"
+          <MenuItem price="$3.25" itemName = "Chiken Salad"
+            imagePath="images/plate__chicken-salad.png" 
+            onAddToCart={handleAddToCart}
           />
-          <MenuItem price="$6.25" itemName = "French Fries with Toast" 
+          <MenuItem price="$2.23" itemName = "French Fries with Toast" 
             imagePath="images/plate__french-fries.png"
           />
-          <li>
-            <div class="plate">
-              <img src="images/plate__french-fries.png" alt="French Fries" class="plate" />
-            </div>
-            <div class="content">
-              <p class="menu-item">French Fries with Ketchup</p>
-              <p class="price">$2.23</p>
-              <button class="in-cart">
-                <img src="images/check.svg" alt="Check" />
-                In Cart
-              </button>
-            </div>
-          </li>
-          <li>
-            <div class="plate">
-              <img src="images/plate__salmon-vegetables.png" alt="Salmon and Vegetables" class="plate" />
-            </div>
-            <div class="content">
-              <p class="menu-item">Salmon and Vegetables</p>
-              <p class="price">$5.12</p>
-              <button class="add">Add to Cart</button>
-            </div>
-          </li>
-          <li>
-            <div class="plate">
-              <img src="images/plate__spaghetti-meat-sauce.png" alt="Spaghetti Meat Sauce" class="plate" />
-            </div>
-            <div class="content">
-              <p class="menu-item">Spaghetti with Meat Sauce</p>
-              <p class="price">$7.82</p>
-              <button class="add">Add to Cart</button>
-            </div>
-          </li>
-          <li>
-            <div class="plate">
-              <img src="images/plate__bacon-eggs.png" alt="Bacon, Eggs, and Toast" class="plate" />
-            </div>
-            <div class="content">
-              <p class="menu-item">Bacon, Eggs, and Toast</p>
-              <p class="price">$5.99</p>
-              <button class="add">Add to Cart</button>
-            </div>
-          </li>
-          <li>
-            <div class="plate">
-              <img src="images/plate__chicken-salad.png" alt="Chicken Salad with Parmesean" class="plate" />
-            </div>
-            <div class="content">
-              <p class="menu-item">Chicken Salad with Parmesan</p>
-              <p class="price">$6.98</p>
-              <button class="add">Add to Cart</button>
-            </div>
-          </li>
-          <li>
-            <div class="plate">
-              <img src="images/plate__fish-sticks-fries.png" alt="Fish Sticks and Fries" class="plate" />
-            </div>
-            <div class="content">
-              <p class="menu-item">Fish Sticks and Fries</p>
-              <p class="price">$6.34</p>
-              <button class="add">Add to Cart</button>
-            </div>
-          </li>
+          <MenuItem price="$5.12" itemName = "Salmon and Vegetables"
+          imagePath="images/plate__salmon-vegetables.png"
+          />
+          <MenuItem price="$7.82" itemName = "Spaghetti Meat Sauce"
+          imagePath="images/plate__spaghetti-meat-sauce.png"
+          />
+          
+          <MenuItem price="$6.98" itemName = "Chicken Salad with Parmesean"
+          imagePath= "images/plate__chicken-salad.png"
+          />
+          
+          <MenuItem price="$6.34" itemName = "Fish Sticks and Fries"
+          imagePath= "images/plate__fish-sticks-fries.png"
+          />
+        
         </ul>
       </div>
 
@@ -86,59 +59,24 @@ function App() {
 
         <ul class="cart-summary">
 
-          
           <li>
-            <div class="plate">
-              <img src="images/plate__fish-sticks-fries.png" alt="Fish Sticks and Fries" class="plate" />
-              <div class="quantity">1</div>
-            </div>
-            <div class="content">
-              <p class="menu-item">Fish Sticks and Fries</p>
-              <p class="price">$6.34</p>
-            </div>
-            <div class="quantity__wrapper">
-              <button class="decrease">
-                <img src="images/chevron.svg" />
-              </button>
-              <div class="quantity">1</div>
-              <button class="increase">
-                <img src="images/chevron.svg" />
-              </button>
-            </div>
-            <div class="subtotal">
-              $6.34
-            </div>
+             <CartItem price={6.34} imagePath= "images/plate__fish-sticks-fries.png"
+             quantity={1} onSubtotalChange={handleSubtotalChange}/> 
+              
           </li>
-
           
           <li>
-            <div class="plate">
-              <img src="images/plate__french-fries.png" alt="French Fries" class="plate" />
-              <div class="quantity">2</div>
-            </div>
-            <div class="content">
-              <p class="menu-item">French Fries with Ketchup</p>
-              <p class="price">$2.23</p>
-            </div>
-            <div class="quantity__wrapper">
-              <button class="decrease">
-                <img src="images/chevron.svg" />
-              </button>
-              <div class="quantity">2</div>
-              <button class="increase">
-                <img src="images/chevron.svg" />
-              </button>
-            </div>
-            <div class="subtotal">
-              $4.46
-            </div>
+            <CartItem price={2.23} imagePath ="images/plate__french-fries.png"
+            quantity={1}  onSubtotalChange={handleSubtotalChange}
+            />
+            
           </li>
         </ul>
 
         <div class="totals">
           <div class="line-item">
             <div class="label">Subtotal:</div>
-            <div class="amount price subtotal">$10.80</div>
+            <div class="amount price subtotal">${(Math.round((subtotal) * 100) / 100).toFixed(2)}</div>
           </div>
           <div class="line-item">
             <div class="label">Tax:</div>
