@@ -5,6 +5,17 @@ const CartItem = (props) => {
     const imagePath = props.imagePath;
     const [quantity, setQuantity] = useState(props.quantity);
     const onSubtotalChange = props.onSubtotalChange;
+    const itemId = props.itemId;
+
+    const invokeOnSubtotalChange = (newQuantity, price) =>  {
+      const event = {
+        "itemId": itemId,
+        "subtotal": (newQuantity) * price,
+        "itemsCount": newQuantity
+      };
+
+      onSubtotalChange(event);
+    };
 
     return (
         <>
@@ -18,11 +29,11 @@ const CartItem = (props) => {
             </div>
 
             <div class="quantity__wrapper">
-              <button class="decrease"onClick={()=> { setQuantity(quantity-1); onSubtotalChange( (quantity-1) * price)}}>
+              <button class="decrease"onClick={()=> { setQuantity(quantity-1); invokeOnSubtotalChange(quantity-1, price);}}>
                 <img src="images/chevron.svg" />
               </button>
               <div class="quantity">{quantity}</div>
-              <button class="increase" onClick={()=> { setQuantity(quantity+1); onSubtotalChange( (quantity+1) * price)}}>
+              <button class="increase" onClick={()=> { setQuantity(quantity+1);invokeOnSubtotalChange(quantity+1, price);}}>
                 <img src="images/chevron.svg" />
               </button>
             </div>

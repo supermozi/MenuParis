@@ -6,6 +6,10 @@ const MenuItem = (props) => {
     const isInCart = props.isInCart;
     const onAddToCart = props.onAddToCart;
 
+    function testAddToCart() {
+        console.log("added");
+    }
+
     return (
         <li>
             <div class="plate">
@@ -27,7 +31,7 @@ const MenuItem = (props) => {
 
             </div>
         </li>
-    );
+    )
 }
 
 
