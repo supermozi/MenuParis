@@ -16,8 +16,12 @@ function App() {
   }
 
   function handleSubtotalChange(e) {
-    // console.log(e);
-    cartItems[e.itemId] = e.subtotal;
+    console.log(e);
+    let menuItem = cartItems[e.itemId];
+    menuItem.quantity = e.itemsCount;
+    menuItem.subtotal = e.subtotal;
+    
+    // cartItems[e.itemId] = e.subtotal;
     
     const a = {}
     a["id_1"] = 10;
@@ -30,27 +34,16 @@ function App() {
     //a = 10
     // console.log(a);
 
-
-
-    // a["id_1"]  + a["id_2"]
-    let subtotal = 0;
-    for (let idd in a) {
-      // idd = id_1
-      // idd = id_2
-      subtotal = subtotal + a["id_1"];
-    }
-
     console.log(cartItems);
     setCartItems(setCartItems);
 
-    subtotal = 0;
+    let newSubtotal = 0;
     for (let item in cartItems) {
-      // cartItems["1"] = 12.68
-      console.log(`itemId:${item} , cartItem:${cartItems[item]}`);
-      subtotal = subtotal + cartItems[item];
+      console.log(`itemId:${item} , cartItem:${cartItems[item].subtotal}`);
+      newSubtotal = newSubtotal + cartItems[item].subtotal;
     }
 
-    setSubtotal(subtotal);
+    setSubtotal(newSubtotal);
   }
 
   function handleAddToCart(price, name, image, itemId) {
@@ -61,11 +54,7 @@ function App() {
       "image":image,
       "itemId":itemId,
       "subtotal":0,
-      "quantity":0,
-      "x": {
-        "a":10,
-        "b":20
-      }
+      "quantity":0
     }
 
     let cartItems2 = {
@@ -131,7 +120,7 @@ function App() {
 
         <ul class="cart-summary">
 
-          <li>
+          {/* <li>
              <CartItem price={6.34} imagePath= "images/plate__fish-sticks-fries.png"
              quantity={1} onSubtotalChange={handleSubtotalChange} itemId="1"/> 
               
@@ -141,12 +130,12 @@ function App() {
             <CartItem price={2.23} imagePath ="images/plate__french-fries.png"
             quantity={1} onSubtotalChange={handleSubtotalChange} itemId="2"
             />
-          </li>
+          </li> */}
 
-          {Object.keys(cartItems).map(item => ( 
-            <li>
-              <CartItem price={2.23} imagePath ="images/plate__french-fries.png"
-              quantity={1} onSubtotalChange={handleSubtotalChange} itemId="2"/>
+          {cartItems && Object.keys(cartItems).map(item => ( 
+            <li key={item}>
+              <CartItem price={cartItems[item].price} imagePath ={cartItems[item].image}
+              quantity={cartItems[item].quantity} onSubtotalChange={handleSubtotalChange} itemId={item}/>
             </li>
 
           )
